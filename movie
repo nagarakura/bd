@@ -68,7 +68,8 @@ db.movie.find();
    }
    ])
 
- 10.   var map=function(){emit(this.name,this.price)}
+ 10.   var map=function()
+{emit(this.name,this.price)}
     var red=function(key,value){
       return Array.sum(value);
     }
