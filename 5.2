@@ -1,0 +1,74 @@
+
+
+
+Create a database called "salesdb" in Hive:
+
+CREATE DATABASE salesdb;
+
+Create a table named "sales" under the "salesdb" database using the provided CSV file:
+
+CREATE TABLE salesdb.sales (
+  transaction_id INT,
+  product_name STRING,
+  price DOUBLE,
+  country STRING,
+  state STRING,
+  payment_method STRING
+)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
+STORED AS TEXTFILE;
+Load the data from the CSV file into the "sales" table:
+sql
+Copy code
+LOAD DATA INPATH 'path_to_sales.csv' INTO TABLE salesdb.sales;
+Replace "path_to_sales.csv" with the actual path to the downloaded "sales.csv" file.
+
+Count the number of sales done by each country:
+SELECT country, COUNT(*) AS sales_count
+FROM salesdb.sales
+GROUP BY country;
+
+Count the number of sales done by each state:
+SELECT state, COUNT(*) AS sales_count
+FROM salesdb.sales
+GROUP BY state;
+
+Display (Product, name) grouped by product:
+SELECT product_name, COUNT(*) AS sales_count
+FROM salesdb.sales
+GROUP BY product_name;
+
+Create a separate view for VISA transactions:
+CREATE VIEW visa_transactions AS
+SELECT *
+FROM salesdb.sales
+WHERE payment_method = 'VISA';
+
+Create a separate view for Mastercard transactions:
+
+CREATE VIEW mastercard_transactions AS
+SELECT *
+FROM salesdb.sales
+WHERE payment_method = 'Mastercard';
+
+Show all the transactions done in Seattle:
+SELECT *
+FROM salesdb.sales
+WHERE state = 'Seattle';
+
+Find the max number of transactions done within the state of Ontario:
+
+SELECT MAX(transaction_id) AS max_transactions
+FROM salesdb.sales
+WHERE state = 'Ontario';
+
+Find the number of transactions whose price is between 1500 and 3600:
+SELECT COUNT(*) AS transactions_count
+FROM salesdb.sales
+WHERE price >= 1500 AND price <= 3600;
+
+List all the transactions done in the United States using Mastercard:
+SELECT *
+FROM salesdb.sales
+WHERE country = 'United States' AND payment_method = 'Mastercard';
