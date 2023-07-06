@@ -90,7 +90,17 @@ public class WC
 		JobClient.runJob(conf);
 		
 				
-		
+
+
+steps
+1. cd $HADOOP_HOME/sbin && ./start-all.sh
+2. hdfs dfs -mkdir /inn
+3. cd ~
+4. gedit filename.txt
+5. hdfs dfs -copyFromLocal filename.txt /inn
+6. hadoop jar map.jar /inn /outt
+7. hdfs dfs -cat /outt/p*
+
 		
 		
 	}
