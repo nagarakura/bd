@@ -1,0 +1,18 @@
+cd $HADOOP_HOME/sbin && ./start-all.sh
+jps
+hdfs dfs -mkdir /akshay
+cd ~
+gedit foo.txt
+
+1. hdfs dfs -copyFromlocal foo.txt /akshay
+2. hdfs dfs -ls
+3. cd (copy the path of hadoop)
+   hdfs dfs -ls
+4. hdfs dfs -mkdir /user/fred
+   ( go to the fred dir and create bar.txt)
+   hdfs dfs -cat bar.txt
+5. cd ..
+   hdfs dfs -get/akshay/f1.txt/Home/hadoop/baz.txt
+6. hdfs dfs -mkdir /input
+7. hdfs dfs -rm -r /input
+8. hdfs dfs -ls
